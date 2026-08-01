@@ -1,0 +1,66 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+:root {
+  --paper: #f5f6f3;
+  --paper-raised: #ffffff;
+  --ink: #14181a;
+  --ink-soft: #55605c;
+  --line: #dbdfda;
+  --brand: #146c43;
+  --brand-deep: #0e4e31;
+  --marker: #c1512f;
+}
+html {
+  scroll-behavior: smooth;
+  background-color: var(--paper);
+}
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+/* Custom index-tab cursor: hide native pointer on precise-pointer devices only */
+@media (pointer: fine) {
+  .rt-cursor-host,
+  .rt-cursor-host * {
+    cursor: none !important;
+  }
+}
+::selection {
+  background: rgba(20, 108, 67, 0.18);
+}
+*:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+.rt-marquee-track {
+  animation: rt-marquee 38s linear infinite;
+}
+.rt-marquee:hover .rt-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes rt-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rt-marquee-track {
+    animation-duration: 120s;
+  }
+}
