@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 import { Toaster } from 'sonner';
 import { Nav } from './components/Nav';
@@ -262,13 +262,81 @@ function ScrollManager() {
   return null;
 }
 
+function CookieConsentBanner() {
+  const [accepted, setAccepted] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem('cookieConsentAccepted');
+    if (stored === 'true') {
+      setAccepted(true);
+    }
+    setReady(true);
+  }, []);
+
+  const acceptCookies = () => {
+    window.localStorage.setItem('cookieConsentStatus', 'accepted');
+    setAccepted(true);
+  };
+
+  const declineCookies = () => {
+    window.localStorage.setItem('cookieConsentStatus', 'declined');
+    setAccepted(true);
+  };
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem('cookieConsentStatus');
+    if (stored === 'accepted' || stored === 'declined') {
+      setAccepted(true);
+    }
+    setReady(true);
+  }, []);
+
+  if (!ready || accepted) return null;
+
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4 sm:px-6">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 rounded-t-3xl border border-line bg-paper-raised/95 px-4 py-4 shadow-[0_-18px_40px_-20px_rgba(20,24,26,0.25)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5">
+        <div className="space-y-2 text-sm leading-6 text-ink-soft sm:max-w-2xl">
+          <p className="text-ink">
+            We use cookies to improve your experience, remember preferences, and analyse site traffic.
+          </p>
+          <p>
+            By continuing, you agree to our{' '}
+            <a href="#/privacy" className="font-semibold text-brand underline-offset-2 hover:underline">
+              Privacy Policy
+            </a>
+            .
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <button
+            type="button"
+            onClick={acceptCookies}
+            className="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-deep focus:outline-none focus:ring-2 focus:ring-brand/40 focus:ring-offset-2">
+            Accept cookies
+          </button>
+          <button
+            type="button"
+            onClick={declineCookies}
+            className="inline-flex items-center justify-center rounded-full border border-line bg-transparent px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-ink/5 focus:outline-none focus:ring-2 focus:ring-brand/40 focus:ring-offset-2">
+            Decline cookies
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="rt-cursor-host relative min-h-screen w-full bg-paper text-ink">
         <AmbientChips />
         <ReticleCursor />
         <ScrollManager />
+        <CookieConsentBanner />
         <Nav />
         <motion.main
           initial={{ opacity: 0 }}
@@ -301,6 +369,6 @@ export function App() {
           }} />
         
       </div>
-    </BrowserRouter>);
+    </HashRouter>);
 
 }

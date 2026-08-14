@@ -48,11 +48,11 @@ function PinterestLogo({ className }: {className?: string;}) {
 }
 
 const SOCIALS = [
-{ label: 'LinkedIn', Icon: LinkedinIcon },
-{ label: 'YouTube', Icon: YoutubeIcon },
-{ label: 'Facebook', Icon: FacebookIcon },
-{ label: 'X', Icon: XLogo },
-{ label: 'Pinterest', Icon: PinterestLogo }];
+{ label: 'LinkedIn', href: 'https://www.linkedin.com/company/rettriivo/', Icon: LinkedinIcon },
+{ label: 'YouTube', href: 'https://www.youtube.com/@Rettrivo', Icon: YoutubeIcon },
+{ label: 'Facebook', href: 'https://www.facebook.com/Rettrivo/', Icon: FacebookIcon },
+{ label: 'X', href: 'https://x.com/Rettrivo', Icon: XLogo },
+{ label: 'Pinterest', href: 'https://www.pinterest.com/Rettrivo/', Icon: PinterestLogo }];
 
 
 export function Footer() {
@@ -101,7 +101,7 @@ export function Footer() {
 
   return (
     <footer className="relative z-10 border-t border-line bg-paper-raised">
-      {/* Top strip — closing prompt */}
+      {/* Top strip - closing prompt */}
       <div className="border-b border-line">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-10 lg:flex-row lg:items-center lg:justify-between">
           <div>
@@ -156,10 +156,12 @@ export function Footer() {
           <span className="mr-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">
             Social
           </span>
-          {SOCIALS.map(({ label, Icon }) =>
+          {SOCIALS.map(({ label, href, Icon }) =>
           <a
             key={label}
-            href="#"
+            href={href}
+            target="_blank"
+            rel="noreferrer"
             aria-label={label}
             className="group relative flex items-center gap-2 border border-line px-3 py-1.5 text-xs text-ink transition-colors hover:border-brand hover:text-brand">
             
@@ -176,7 +178,7 @@ export function Footer() {
 
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-5 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-soft sm:flex-row sm:items-center sm:justify-between">
-          <span>© 2026 Rettrivo LLC — All rights reserved</span>
+          <span>© 2026 Rettrivo LLC. All rights reserved</span>
           <span>Founded 2023 · Enterprise RAG infrastructure</span>
         </div>
       </div>

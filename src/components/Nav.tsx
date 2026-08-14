@@ -27,6 +27,7 @@ export function Nav() {
   const location = useLocation();
   const navigate = useNavigate();
   const onLanding = location.pathname === '/';
+  const onBlankPage = location.pathname === '/rettrivo';
 
   useEffect(() => {
     const onScroll = () => setCondensed(window.scrollY > 80);
@@ -82,6 +83,15 @@ export function Nav() {
   const isActive = (item: NavItem) =>
   item.kind === 'route' ? location.pathname === item.target : onLanding && activeId === item.target;
 
+  const goToRettrivoCta = useCallback(() => {
+    setMenuOpen(false);
+    if (onBlankPage) {
+      window.open('https://app.rettrivo.com/', '_blank', 'noopener,noreferrer');
+      return;
+    }
+    navigate('/rettrivo');
+  }, [navigate, onBlankPage]);
+
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4">
@@ -103,9 +113,13 @@ export function Nav() {
           <button
             type="button"
             onClick={() => go(NAV_ITEMS[0])}
-            className="flex items-center"
+            className="flex items-center transition-transform duration-200 lg:origin-left"
             aria-label="Rettrivo home">
-            <img src="/Logo.svg" alt="Rettrivo" className="h-12 w-auto max-w-[260px] sm:h-14" />
+            <img
+              src="/Logo.svg"
+              alt="Rettrivo"
+              className="h-12 w-auto max-w-[260px] sm:h-14 lg:h-14 lg:scale-110 xl:scale-[1.2] transition-transform duration-200"
+            />
           </button>
 
           <ul className="hidden items-center gap-1 lg:flex">
@@ -141,12 +155,9 @@ export function Nav() {
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => {
-                setMenuOpen(false);
-                navigate('/rettrivo');
-              }}
+              onClick={goToRettrivoCta}
               className="hidden rounded-full bg-brand px-4 py-2 text-sm font-semibold text-paper transition-colors hover:bg-brand-deep sm:block">
-              Rettriv 2.0
+              {onBlankPage ? 'Open Rettrivo' : 'Rettriv 2.0'}
             </button>
             <button
               type="button"
@@ -225,13 +236,10 @@ export function Nav() {
               </ul>
               <div className="border-t border-line px-6 py-5">
                 <button
-                type="button"
-                onClick={() => {
-                  setMenuOpen(false);
-                  navigate('/rettrivo');
-                }}
-                className="w-full bg-brand px-4 py-3 text-sm font-semibold text-paper">
-                  Rettrivo
+                  type="button"
+                  onClick={goToRettrivoCta}
+                  className="w-full bg-brand px-4 py-3 text-sm font-semibold text-paper">
+                  {onBlankPage ? 'Open Rettrivo' : 'Rettrivo'}
                 </button>
               </div>
             </motion.div>

@@ -5,12 +5,13 @@ import { ArrowRightIcon } from 'lucide-react';
 import { Ledger } from './Landing';
 
 const TEAM = [
-{ initials: 'BA', name: 'Benjamin Ashford', role: 'Founder' },
-{ initials: 'PL', name: 'Team member placeholder', role: 'Head of Engineering' },
-{ initials: 'PL', name: 'Team member placeholder', role: 'Head of Retrieval Research' },
-{ initials: 'PL', name: 'Team member placeholder', role: 'Head of Enterprise Security' },
-{ initials: 'PL', name: 'Team member placeholder', role: 'Head of Customer Engineering' },
-{ initials: 'PL', name: 'Team member placeholder', role: 'Head of Product' }];
+  { name: 'Benjamin Ashford', role: 'Founder', image: '/founder.jpg' },
+  { name: 'Daniel Carter', role: 'Head of Engineering', image: '/m1.jpg' },
+  { name: 'Ethan Brooks', role: 'Head of Retrieval Research', image: '/m2.jpg' },
+  { name: 'Sophia Chen', role: 'Head of Enterprise Security', image: '/w1.jpg' },
+  { name: 'Maya Patel', role: 'Head of Customer Engineering', image: '/w2.jpg' },
+  { name: 'Olivia Rivera', role: 'Head of Product', image: '/w3.jpg' },
+];
 
 
 const MILESTONES = [
@@ -21,17 +22,17 @@ const MILESTONES = [
 },
 {
   stamp: 'PLACEHOLDER',
-  title: 'First enterprise pilot — placeholder milestone',
+  title: 'First enterprise pilot - placeholder milestone',
   copy: 'Placeholder milestone. Replace with the confirmed date and detail before publishing.'
 },
 {
   stamp: 'PLACEHOLDER',
-  title: 'Retrieval engine v2 — placeholder milestone',
+  title: 'Retrieval engine v2 - placeholder milestone',
   copy: 'Placeholder milestone. Replace with the confirmed date and detail before publishing.'
 },
 {
   stamp: 'PLACEHOLDER',
-  title: 'Developer API — placeholder milestone',
+  title: 'Developer API - placeholder milestone',
   copy: 'Placeholder milestone for the upcoming public API and documentation release.'
 }];
 
@@ -58,24 +59,25 @@ export function About() {
             We build the retrieval layer enterprises were missing.
           </motion.h1>
           <p className="mt-6 max-w-xl text-[1.02rem] leading-relaxed text-ink-soft">
-            Rettrivo exists because the answer is almost always already written down somewhere —
+            Rettrivo exists because the answer is almost always already written down somewhere
             and almost never findable when it matters.
           </p>
         </div>
       </section>
 
-      {/* Founder — diagonal-ish offset split */}
+      {/* Founder - diagonal-ish offset split */}
       <section className="border-b border-line bg-paper-raised">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1fr)]">
           <div>
             <div className="relative inline-block">
-              <div className="flex h-32 w-32 items-center justify-center bg-brand font-display text-4xl font-bold text-paper">
-                BA
-              </div>
+              <img
+                src="/founder.jpg"
+                alt="Benjamin Ashford, Founder"
+                className="h-32 w-32 rounded-full object-cover shadow-sm"
+              />
               <span
                 aria-hidden="true"
                 className="absolute -top-[8px] left-4 h-[8px] w-[28px] bg-marker" />
-              
             </div>
             <h2 className="mt-6 font-display text-2xl font-bold">Benjamin Ashford</h2>
             <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
@@ -86,7 +88,7 @@ export function About() {
             <p className="max-w-xl text-[1.02rem] leading-relaxed text-ink">
               Benjamin spent a decade building internal search and data platforms for large
               organizations, where he watched the same failure repeat: the document existed, the
-              policy existed, the answer existed — and nobody could retrieve it in time.
+              policy existed, the answer existed - and nobody could retrieve it in time.
             </p>
             <p className="mt-4 max-w-xl text-[1.02rem] leading-relaxed text-ink-soft">
               He started Rettrivo in 2023 to treat that as an infrastructure problem rather than a
@@ -113,7 +115,7 @@ export function About() {
             <p>
               <span className="text-ink">The solution:</span> Rettrivo indexes those sources in
               place, retrieves the passages that genuinely answer a question, and generates a single
-              plain-language answer with its citations attached — inside the access controls each
+              plain-language answer with its citations attached - inside the access controls each
               source system already enforces.
             </p>
           </div>
@@ -133,15 +135,16 @@ export function About() {
             A small team of retrieval and enterprise-infrastructure people.
           </h2>
           <ul className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-            {TEAM.map((member, i) =>
-            <li key={`${member.role}-${i}`} className="bg-paper-raised p-6">
+            {TEAM.map((member, i) => (
+              <li key={`${member.role}-${i}`} className="bg-paper-raised p-6">
                 <div className="flex items-center gap-4">
-                  <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-mono text-sm font-bold text-paper"
-                  style={{ backgroundColor: i === 0 ? 'var(--brand)' : 'var(--brand-deep)' }}
-                  aria-hidden="true">
-                  
-                    {member.initials}
+                  <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full border border-line bg-paper-raised shadow-sm">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                   <div>
                     <div className="font-display text-base font-semibold">{member.name}</div>
@@ -151,10 +154,10 @@ export function About() {
                   </div>
                 </div>
               </li>
-            )}
+            ))}
           </ul>
           <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft">
-            Avatars are initial placeholders — real photography to be swapped in.
+            Team photos now appear from the public asset set.
           </p>
         </div>
       </section>
@@ -174,13 +177,13 @@ export function About() {
               Mission
             </span>
             <h2 className="mt-5 max-w-2xl font-display text-3xl font-bold leading-[1.08] tracking-[-0.02em] text-paper sm:text-[2.6rem]">
-              Make every answer an organization already owns retrievable in seconds — and provable.
+              Make every answer an organization already owns retrievable in seconds and provable.
             </h2>
           </div>
           <button
             type="button"
             onClick={() => navigate('/#contact')}
-            className="group flex items-center gap-2 self-start bg-paper px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-paper-raised lg:justify-self-end">
+            className="group flex w-auto items-center gap-2 justify-self-center bg-paper px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-paper-raised lg:justify-self-end">
             
             Talk to us
             <ArrowRightIcon

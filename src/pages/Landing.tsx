@@ -462,12 +462,12 @@ function Problem() {
                 <li className="border-t border-line pt-5">
                   <span className="font-mono text-[11px] tracking-[0.14em] text-marker">
                     {i === 0
-                      ? '01 — Scattered by Design'
+                      ? '01 - Scattered by Design'
                       : i === 1
-                        ? '02 — The Hidden Tax'
+                        ? '02 - The Hidden Tax'
                         : i === 2
-                          ? '03 — Strings, Not Meaning'
-                          : '04 — Bottlenecked by Memory'}
+                          ? '03 - Strings, Not Meaning'
+                          : '04 - Bottlenecked by Memory'}
                   </span>
                   <p className="mt-2 max-w-md text-[1.02rem] leading-relaxed text-ink">{item}</p>
                 </li>
@@ -760,7 +760,7 @@ function Capabilities() {
 
 const LEGACY_RESULTS = [
   { id: 'RESULT_01', title: 'MSA_2019_final_v3.pdf', meta: 'Match: "termination" · 41 pages' },
-  { id: 'RESULT_02', title: 'Procurement wiki — Vendors', meta: 'Match: "notice" · last edit 2021' },
+  { id: 'RESULT_02', title: 'Procurement wiki - Vendors', meta: 'Match: "notice" · last edit 2021' },
   { id: 'RESULT_03', title: 'RE: contract questions (thread)', meta: 'Match: "60 days" · 18 replies' },
   { id: 'RESULT_04', title: 'legal-templates/archive.zip', meta: 'Match: "vendor" · 214 files' },
   { id: 'RESULT_05', title: 'Q3_ops_review.xlsx', meta: 'Match: "contract" · sheet 4' }];
@@ -953,6 +953,14 @@ const TESTIMONIALS = [
 function Testimonials() {
   const [index, setIndex] = useState(0);
   const active = TESTIMONIALS[index];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % TESTIMONIALS.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
     <section id="testimonials" className="border-b border-line bg-[#EDEFEB]">
@@ -1208,29 +1216,49 @@ function WhoItsFor() {
 /* --------------------------------------------------- 4.7 · tech showcase */
 
 function Technology() {
-  return (
-    <section id="technology" className="border-b border-line bg-[#EDEFEB]">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-12 lg:flex-row lg:items-center lg:justify-between">
-        <Reveal>
-          <div className="flex items-center gap-3">
-            <CpuIcon className="h-4 w-4 text-marker" aria-hidden="true" />
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
-              Infrastructure Trusted by the Enterprise
-            </p>
-          </div>
-        </Reveal>
-        <Reveal delay={0.08}>
-          <ul className="flex flex-wrap items-center gap-3">
-            {['GPU-Accelerated', 'Enterprise-Grade', 'Low-Latency'].map((t) =>
-              <li
-                key={t}
-                className="border border-line bg-paper-raised/60 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-soft">
+  const gridLines = Array.from({ length: 60 }, (_, i) => i);
 
-                {t}
-              </li>
-            )}
-          </ul>
-        </Reveal>
+  return (
+    <section id="technology" className="relative overflow-hidden border-b border-line bg-[#EDEFEB]">
+      <div aria-hidden="true" className="absolute inset-0">
+        {gridLines.map((line) => (
+          <div
+            key={line}
+            className="absolute inset-x-0 border-t border-[#146c42]/40"
+            style={{ top: `${(line / 60) * 100}%` }}
+          />
+        ))}
+      </div>
+
+      <div className="relative mx-auto max-w-6xl px-6 py-14 sm:py-16">
+        <div className="rounded-[28px] border border-[#146c42]/20 bg-paper-raised/85 p-5 shadow-[0_20px_40px_-30px_rgba(20,24,26,0.45)] sm:p-8 lg:p-10">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+            <Reveal>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center border border-[#146c42]/25 bg-[#146c42]/10 text-[#146c42]">
+                  <CpuIcon className="h-4 w-4" aria-hidden="true" />
+                </div>
+                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
+                  Infrastructure Trusted by the Enterprise
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <div className="grid gap-3 sm:grid-cols-3">
+                {['GPU-Accelerated', 'Enterprise-Grade', 'Low-Latency'].map((t) => (
+                  <div
+                    key={t}
+                    className="relative border border-[#146c42]/20 bg-paper px-4 py-4 text-center">
+                    <span className="relative font-mono text-[10px] uppercase tracking-[0.12em] text-ink-soft">
+                      {t}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
       </div>
     </section>);
 
@@ -1455,8 +1483,9 @@ function Trust() {
         <div className="relative overflow-hidden rounded-[28px] border border-line bg-paper-raised/70">
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-cover bg-center opacity-90"
+            className="absolute inset-0 hidden bg-cover bg-no-repeat bg-top opacity-90 sm:block sm:bg-center"
             style={{ backgroundImage: 'url("/Who We Are.png")' }} />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-emerald-600/80 via-emerald-500/70 to-lime-400/60 sm:hidden" />
           <div className="relative px-6 py-12 sm:px-10 lg:px-12">
             <Ledger eyebrow="Who We Are " title="Founded to fix the problem every large organization has" />
           </div>
@@ -1574,7 +1603,7 @@ const PLANS: Plan[] = [
     code: 'PLAN_02',
     name: 'Business',
     blurb: 'Multi-team rollout with deeper integrations and retrieval analytics.',
-    monthly: 129,
+    monthly: 103,
     annual: 71,
     unit: 'per user / month',
     features: [
@@ -1588,7 +1617,7 @@ const PLANS: Plan[] = [
     ctaLabel: 'Start checkout',
     featured: true,
     checkoutLinks: {
-      monthly: 'https://buy.stripe.com/test_3cI28sbgaaMOdUN4ymgfu02',
+      monthly: 'https://buy.stripe.com/test_28E4gA9826wy03X1magfu04',
       annual: 'https://buy.stripe.com/test_5kQdRa2JEf34g2V9SGgfu03'
     }
   },
@@ -1906,7 +1935,7 @@ function Contact() {
       setCaptchaToken('');
     } catch (err) {
       console.error('Contact submit error', err);
-      toast.error('Failed to send message — please try again later.');
+      toast.error('Failed to send message - please try again later.');
     } finally {
       setSending(false);
     }
@@ -1963,7 +1992,6 @@ function Contact() {
           </Reveal>
           <Reveal delay={0.2}>
             <ul className="mt-8 space-y-3 border-t border-line pt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-soft">
-              <li><strong>Legal Name:</strong> Rettrivo LLC</li>
               <li><strong>Founder Name:</strong> Benjamin Ashford</li>
               <li><strong>Founded Date:</strong> April 28, 2023</li>
               <li><strong>Address:</strong> 600 Wilshire Blvd, Los Angeles, CA 90013, USA</li>

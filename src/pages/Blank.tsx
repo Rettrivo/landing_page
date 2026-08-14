@@ -142,7 +142,7 @@ export function Blank() {
             <Reveal delay={0.26}>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <a
-                  href="https://app.rettrivo.com"
+                  href="https://app.rettrivo.com/"
                   target="_blank"
                   rel="noreferrer"
                   className="group flex items-center gap-2 bg-brand px-6 py-3.5 text-sm font-semibold text-paper shadow-[4px_4px_0_0_var(--ink)] transition-all hover:bg-brand-deep hover:shadow-[2px_2px_0_0_var(--ink)]">
@@ -246,7 +246,7 @@ export function Blank() {
       <section className="bg-brand">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-20 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,0.8fr)] lg:items-end">
           <Reveal><p className="font-mono text-[11px] uppercase tracking-[0.22em] text-paper/70">Rettriv 2.0 / Live product</p><h2 className="mt-5 max-w-3xl font-display text-3xl font-bold leading-[1.04] tracking-[-0.03em] text-paper sm:text-[3.2rem]">Make the knowledge your organization already owns easier to find, understand, and prove.</h2></Reveal>
-          <Reveal delay={0.12} className="lg:justify-self-end"><a href="https://app.rettrivo.com" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 bg-paper px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-paper-raised">Open Rettriv 2.0 <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></a></Reveal>
+          <Reveal delay={0.12} className="lg:justify-self-end"><a href="https://app.rettrivo.com/" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 bg-paper px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-paper-raised">Open Rettriv 2.0 <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></a></Reveal>
         </div>
       </section>
     </div>
